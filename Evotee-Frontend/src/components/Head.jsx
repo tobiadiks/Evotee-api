@@ -5,13 +5,20 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 class Head extends Component {
-    state = {  }
+    state = { 
+        electorates:[]
+     }
 
     componentDidMount(){
-        const apiUrl = 'http://localhost:8000/api/election';
+        const apiUrl = 'http://localhost:8000/api/electorate';
         fetch(apiUrl)
         .then((response) => response.json())
-        .then((data) => console.log(data));
+        .then((data) => this.setState(
+            {electorates:data},
+            
+        )
+        );
+        
 
 }
     render() { 
@@ -31,6 +38,19 @@ class Head extends Component {
             }}>free & fair...</Typography>
 
             </Grid>
+            <hr/>
+            <br/>
+            <ul>
+            {/* electionName, electionId, organizer, is_active */}
+            <h2>Electorates</h2>
+            {this.state.electorates.map((v,i)=>
+            
+            <li key={i}> {v.electorateName }
+            </li>
+            )}
+
+            </ul>
+            
           
         </div> );
     }
