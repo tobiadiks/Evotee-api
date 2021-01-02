@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 from School.models import Electorate
 
 import random
@@ -12,10 +13,12 @@ class Election(models.Model):
 	electionId=models.IntegerField(unique=True,default=generator)
 	organizer=models.ForeignKey(Electorate, on_delete=models.CASCADE)
 	is_active=models.BooleanField(default=False)
+	startDate = models.DateField(default=now)
+	
 	
 	
 	def __str__(self):
-		return str(self.electionId)
+		return str(self.electionName)
 		
 		
 class Contestant(models.Model):
