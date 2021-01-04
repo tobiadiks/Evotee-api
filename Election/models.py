@@ -13,8 +13,8 @@ class Election(models.Model):
 	electionId=models.IntegerField(primary_key = True, unique=True,default=generator)
 	organizer=models.ForeignKey(Electorate, on_delete=models.CASCADE)
 	is_active=models.BooleanField(default=False)
-	startDate = models.DateField(default=now)
-	
+	startDate = models.DateField()
+	endDate = models.DateField()
 	
 	
 	def __str__(self):
