@@ -1,9 +1,15 @@
 from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
+from .resources import VotersResource
 
 from .models import Voter
 
 
-class VoterAdmin(admin.ModelAdmin):
+
+
+class VoterAdmin(ImportExportModelAdmin):
+    resource_class = VotersResource
+
     
     list_display = ('firstName','lastName','idNumber','active','voted')
     list_display_links = ('firstName','idNumber')
@@ -15,6 +21,6 @@ class VoterAdmin(admin.ModelAdmin):
 
 
 
-admin.site.register(Voter,VoterAdmin)
+admin.site.register(Voter, VoterAdmin)
 
 # Register your models here.

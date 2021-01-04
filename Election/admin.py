@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Election,Contestant
 from School.models import Electorate
+from import_export.admin import ImportExportModelAdmin
 
 class ContestantInline(admin.TabularInline):
     model = Contestant
