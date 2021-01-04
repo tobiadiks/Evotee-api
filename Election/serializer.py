@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Election, Contestant
 from School.models import Electorate
+from Voters.models import Voter
 
 class ElectionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -17,3 +18,8 @@ class ContestantSerializer(serializers.ModelSerializer):
         model = Contestant
         fields = ('contestantName','position','votes','electionName','is_active')
 
+class VoterSerializer(serializers
+.ModelSerializer):
+    class Meta:
+        model = Voter
+        fields = '__all__'
