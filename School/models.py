@@ -8,7 +8,7 @@ def generator():
 class Electorate(models.Model):
 	electorateName = models.CharField(max_length=200, unique=True)
 	electorateEmail = models.EmailField(max_length=255, unique=True)
-	electorateId=models.IntegerField(unique=True,default=generator)
+	electorateId=models.IntegerField(primary_key = True, unique=True,default=generator)
 	electorateApproved = models.BooleanField(default=False)
 	
 	def __str__(self):

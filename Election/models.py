@@ -10,7 +10,7 @@ def generator():
 
 class Election(models.Model):
 	electionName=models.CharField(max_length=200)
-	electionId=models.IntegerField(unique=True,default=generator)
+	electionId=models.IntegerField(primary_key = True, unique=True,default=generator)
 	organizer=models.ForeignKey(Electorate, on_delete=models.CASCADE)
 	is_active=models.BooleanField(default=False)
 	startDate = models.DateField(default=now)
