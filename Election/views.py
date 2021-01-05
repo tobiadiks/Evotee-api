@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, ListAPIView
+from rest_framework.generics import ListCreateAPIView, ListAPIView
 from rest_framework import permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -9,15 +9,17 @@ from .models import Election, Contestant
 from School.models import Electorate
 from Voters.models import Voter 
 
-class ElectionApi(ListCreateAPIView):
-    queryset = Election.objects.all()
-    serializer_class = ElectionSerializer
-    permission_classes = [permissions.IsAdminUser]
 
-class ElectorateApi(ListCreateAPIView):
+
+class createElectorateApi(ListCreateAPIView):
     queryset = Electorate.objects.all()
     serializer_class = ElectorateSerializer
     permission_classes = [permissions.IsAdminUser]
+    
+class listElectorateApi(ListAPIView):
+    queryset = Electorate.objects.all()
+    serializer_class = ElectorateSerializer
+    permission_classes = [permissions.IsAdminUser] 
 
 # getting details of each electorates on the bases electorateId
 
@@ -29,24 +31,46 @@ def electorateDetail(request, pk):
 
 #  update of each electorates on the bases electorateId
 
-@api_view(['POST'])
+@api_view(['GET', 'PUT'])
 def electorateUpdate(request, pk):
-	task = Electorate.objects.get(electorateId=pk)
-	serializer = ElectorateSerializer(instance=task, data=request.data)
+    try:
+        model=Electorate.objects.get(electorateId = pk)
+    except:
+        return Response ('Not Found')
+    
+    if request.method == 'GET':
 
-	if serializer.is_valid():
-		serializer.save()
-
-	return Response(serializer.data)
+        serializer = ElectorateSerializer(instance=model)
+        return Response(serializer.data)  
+        
+    if request.method == 'PUT':
+        
+        serializer = ElectorateSerializer(model, request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response ('Successful Updated')
+            
+        else:
+            return Response ('Failed')
 
 #  delete electorates on the bases electorateId
-@api_view(['DELETE'])
+            
+@api_view(['GET', 'DELETE'])
 def electorateDelete(request, pk):
-    task = Electorate.objects.get(electorateId=pk)
+    try:
+        model=Electorate.objects.get(electorateId= pk)
+    except:
+        return Response ('Not Found')
+    
+    if request.method == 'GET':
 
-    task.delete()
-
-    return Response('Contestent succsesfully delete!')
+        serializer = ElectorateSerializer(instance=model)
+        return Response(serializer.data)  
+        
+            
+    if request.method == 'DELETE':
+        model.delete()
+        return Response ('Deleted')            
 
 
 
@@ -71,24 +95,46 @@ def contestentDetail(request, pk):
 	return Response(serializer.data)
 
 
-@api_view(['POST'])
-def contestentUpdate(request, pk):
-	task = Contestant.objects.get(contestantName=pk)
-	serializer = ContestantSerializer(instance=task, data=request.data)
+@api_view(['GET', 'PUT'])
+def contestantUpdate(request, pk):
+    try:
+        model=Contestant.objects.get(contestantId = pk)
+    except:
+        return Response ('Not Found')
+    
+    if request.method == 'GET':
 
-	if serializer.is_valid():
-		serializer.save()
+        serializer = ContestantSerializer(instance=model)
+        return Response(serializer.data)  
+        
+    if request.method == 'PUT':
+        
+        serializer = ContestantSerializer(model, request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response ('Successful Updated')
+            
+        else:
+            return Response ('Failed')
 
-	return Response(serializer.data)
 
+            
+@api_view(['GET', 'DELETE'])
+def ContestantDelete(request, pk):
+    try:
+        model=Contestant.objects.get(contestantId= pk)
+    except:
+        return Response ('Not Found')
+    
+    if request.method == 'GET':
 
-@api_view(['DELETE'])
-def ContestentDelete(request, pk):
-    task = Contestant.objects.get(idNumber=pk)
-
-    task.delete()
-
-    return Response('Contestent succsesfully delete!')
+        serializer = ContestantSerializer(instance=model)
+        return Response(serializer.data)  
+        
+            
+    if request.method == 'DELETE':
+        model.delete()
+        return Response ('Deleted')            
 
 
 
@@ -111,58 +157,100 @@ def voterDetail(request, pk):
 	serializer = VoterSerializer(tasks, many=False)
 	return Response(serializer.data)
 
-@api_view(['POST'])
-def VoterUpdate(request, pk):
-	task = Election.objects.get(idNumber=pk)
-	serializer = VoterSerializer(instance=task, data=request.data)
+@api_view(['GET', 'PUT'])
+def voterUpdate(request, pk):
+    try:
+        model=Voter.objects.get(idNumber= pk)
+    except:
+        return Response ('Not Found')
+    
+    if request.method == 'GET':
 
-	if serializer.is_valid():
-		serializer.save()
-
-	return Response(serializer.data)
-
-@api_view(['DELETE'])
+        serializer = VoterSerializer(instance=model)
+        return Response(serializer.data)  
+        
+    if request.method == 'PUT':
+        
+        serializer = VoterSerializer(model, request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response ('Successful Updated')
+            
+        else:
+            return Response ('Failed')
+            
+@api_view(['GET', 'DELETE'])
 def VoterDelete(request, pk):
-    task = Voter.objects.get(idNumber=pk)
+    try:
+        model=Voter.objects.get(idNumber= pk)
+    except:
+        return Response ('Not Found')
+    
+    if request.method == 'GET':
 
-    task.delete()
-
-    return Response('Voter succsesfully delete!')
-
+        serializer = VoterSerializer(instance=model)
+        return Response(serializer.data)  
+        
+            
+    if request.method == 'DELETE':
+        model.delete()
+        return Response ('Deleted')            
 
     
+class createElectionApi(ListCreateAPIView):
+    queryset = Election.objects.all()
+    serializer_class = ElectionSerializer
+    permission_classes = [permissions.IsAdminUser]
 class listElectionApi(ListAPIView):
     queryset = Election.objects.all()
     serializer_class = ElectionSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes=[permissions.AllowAny]
 
-
-
+#get-detail
 @api_view(['GET'])
-def taskDetail(request, pk):
-	tasks = Election.objects.get(electionId=pk)
-	serializer = ElectionSerializer(tasks, many=False)
+def electionDetail(request, pk):
+	election = Election.objects.get(electionId=pk)
+	serializer = ElectionSerializer(election, many=False)
 	return Response(serializer.data)
 
+#update
+@api_view(['GET', 'PUT'])
+def electionUpdate(request, pk):
+    try:
+        model=Election.objects.get(electionId = pk)
+    except:
+        return Response ('Not Found')
+    
+    if request.method == 'GET':
 
-@api_view(['POST'])
-def ElectioUpdate(request, pk):
-	task = Election.objects.get(electionId=pk)
-	serializer = ElectionSerializer(instance=task, data=request.data)
+        serializer = ElectionSerializer(instance=model)
+        return Response(serializer.data)  
+        
+    if request.method == 'PUT':
+        
+        serializer = ElectionSerializer(model, request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response ('Successful Updated')
+            
+        else:
+            return Response ('Failed')
 
-	if serializer.is_valid():
-		serializer.save()
-
-	return Response(serializer.data)
-
-
-
-@api_view(['DELETE'])
+@api_view(['GET', 'DELETE'])
 def ElectionDelete(request, pk):
-    task = Election.objects.get(electionId=pk)
+    try:
+        model=Election.objects.get(electionId= pk)
+    except:
+        return Response ('Not Found')
+    
+    if request.method == 'GET':
 
-    task.delete()
-
-    return Response('Election succsesfully delete!')
- 
-    #TODO:i will be making the update view, it required a lookup field 27/12/2020
+        serializer = ElectionSerializer(instance=model)
+        return Response(serializer.data)  
+        
+            
+    if request.method == 'DELETE':
+        model.delete()
+        return Response ('Deleted')    
+        
+    

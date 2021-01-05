@@ -14,7 +14,7 @@ class Election(models.Model):
 	organizer=models.ForeignKey(Electorate, on_delete=models.CASCADE)
 	is_active=models.BooleanField(default=False)
 	startDate = models.DateField(default=now)
-	
+	endDate = models.DateField(default= now)
 	
 	
 	def __str__(self):
@@ -27,6 +27,7 @@ class Contestant(models.Model):
 	votes=models.IntegerField(default=0)
 	electionName=models.ForeignKey(Election, on_delete=models.CASCADE)
 	is_active=models.BooleanField(default=False)
+	contestantId=models.IntegerField(primary_key=True , default = generator)
 	
 	def __str__(self):
 		return self.contestantName

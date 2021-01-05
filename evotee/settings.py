@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'import_export',
     'School',
     'Election',
     'Voters',
@@ -128,3 +129,5 @@ STATIC_URL = '/static/'
 CORS_ALLOWED_ORIGINS = ['http://localhost:3000',
 
 ]
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
