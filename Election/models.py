@@ -20,9 +20,12 @@ class Election(models.Model):
 	def __str__(self):
 		return str(self.electionName)
 		
-		
+
+
 class Contestant(models.Model):
-	contestantName=models.CharField(max_length=30, default= '')
+	contestantName=models.CharField(max_length=64,  null=False)
+
+
 	position=models.CharField(max_length=40, default='')
 	votes=models.IntegerField(default=0)
 	electionName=models.ForeignKey(Election, on_delete=models.CASCADE)
