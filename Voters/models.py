@@ -1,6 +1,8 @@
 from django.db import models
 from Election.models import Election
 
+
+
 class Voter(models.Model):
     firstName = models.CharField(max_length = 40)
     lastName = models.CharField(max_length = 40)

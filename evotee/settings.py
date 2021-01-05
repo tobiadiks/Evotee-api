@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'School',
     'Election',
     'Voters',
+    
 ]
 
 MIDDLEWARE = [
