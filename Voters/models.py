@@ -14,6 +14,8 @@ class Voter(models.Model):
     qualifiedElection = models.ManyToManyField(Election)
     active = models.BooleanField(default=True)
     voted = models.BooleanField(default=False)
+    id=models.IntegerField(
+default=0)
 
 
     def __str__(self):

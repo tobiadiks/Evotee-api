@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Electorate
+from import_export.admin import ImportExportModelAdmin
 
 class ElectorateAdmin(admin.ModelAdmin):
     
