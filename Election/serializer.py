@@ -16,7 +16,7 @@ class ElectorateSerializer(serializers.ModelSerializer):
 class ContestantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contestant
-        fields = ('contestantName','position','votes','electionName','is_active')
+        fields = ('contestantName','position','votes','electionName','is_active','contestantId')
 
 class VoterSerializer(serializers
 .ModelSerializer):
