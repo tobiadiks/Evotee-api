@@ -3,6 +3,7 @@ from rest_framework.generics import ListCreateAPIView, ListAPIView
 from rest_framework import permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.views import APIView 
 
 from .serializer import ElectionSerializer, ElectorateSerializer, ContestantSerializer,VoterSerializer
 from .models import Election, Contestant
@@ -16,10 +17,32 @@ class createElectorateApi(ListCreateAPIView):
     serializer_class = ElectorateSerializer
     permission_classes = [permissions.IsAdminUser]
     
-class listElectorateApi(ListAPIView):
-    queryset = Electorate.objects.all()
+# class listElectorateApi(ListAPIView):
+#     queryset = Electorate.objects.all()
+#     serializer_class = ElectorateSerializer
+#     permission_classes = [permissions.IsAdminUser] 
+
+
+class ElectionApi(APIView):
     serializer_class = ElectorateSerializer
-    permission_classes = [permissions.IsAdminUser] 
+
+    def get(self, request): 
+        detail = [ {"name": detail.electorateName,"detail": detail.electorateEmail ,'id':detail.electorateId , 'desctiption':detail.electorateApproved }  
+        for detail in Electorate.objects.all().order_by('-id')] 
+        return Response(detail) 
+  
+    def post(self, request): 
+  
+        serializer = ReactSerializer(data=request.data) 
+        if serializer.is_valid(raise_exception=True): 
+            serializer.save() 
+            return  Response(serializer.data) 
+
+ 
+
+
+
+
 
 # getting details of each electorates on the bases electorateId
 

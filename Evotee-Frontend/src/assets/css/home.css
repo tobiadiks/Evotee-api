@@ -1,0 +1,71 @@
+body, html {
+    height: auto;
+    margin: 0;
+}
+body{
+    /* The image used */
+    background-image: url(../images/bgimage.webp);
+
+    /* Full height */
+    height: auto; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.hello{
+    color: white;
+}
+
+ .testing{
+    
+    position:absolute; 
+     right: 0; 
+    margin-left: auto;
+
+}
+
+.voteBox{
+
+    height: 150px;
+    width: 200px;
+    margin-left: 7%;
+    
+    background: transparent;
+    color: white;
+    border: 4px solid rgb(100, 108, 180);
+    box-shadow:20px 20px 50px 10px pink;
+    
+    
+
+}
+
+
+
+.RegisterBox{
+
+    height: 150px;
+    width: 220px;
+    position: relative;
+    float: right;
+    margin-right: 13%;
+    
+    background: transparent;
+    color: white;
+    border: 4px solid rgb(228, 225, 49);
+    box-shadow:20px 20px 50px 10px rgb(97, 104, 4);
+    
+    
+
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color:royalblue;
+    color: white;
+    text-align: center;
+  }

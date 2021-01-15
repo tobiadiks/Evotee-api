@@ -5,7 +5,7 @@ from .views import *
 urlpatterns = [
     #Electorate  urls
     path('api/create/electorate',createElectorateApi.as_view()),
-    path('api/list/electorate', listElectorateApi.as_view()),
+    # path('api/list/electorate', listElectorateApi.as_view()),
 
     path('api/electorate-detail/<str:pk>/', electorateDetail, name="electorate-detail"), # try http://localhost:8000/api/electorate-detail/988063249/
     path('api/electorate-update/<str:pk>/', electorateUpdate, name="electorate-update"), #try http://localhost:8000/api/electorate-update/988063249/
