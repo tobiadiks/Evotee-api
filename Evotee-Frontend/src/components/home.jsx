@@ -1,7 +1,19 @@
 import React from 'react'
 import bgimg from '../assets/images/bgimage.webp'
 import HomeCss from '../assets/css/home.css'
-export default class Home extends React.Component{
+import ReactRouter from '../containers/pages.js'
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  browserHistory
+} from "react-router-dom";
+
+
+
+class Home extends React.Component{
 render(){
     return(
 
@@ -41,20 +53,25 @@ class NavBar extends React.Component{
           <div className='testing'>
             <ul className="navbar-nav">
               <li className="nav-item ">
-                  
-                <a className="nav-link active hello" aria-current="page" href="#">Home</a>
+              <Link className="active hello mr-4"  href="#"  to='/'>Home</Link>
+                {/* <a className="nav-link active hello" aria-current="page" href="#">Home</a> */}
               </li>
               <li className="nav-item">
-                <a className="nav-link  hello ml-5" href="#">Polling</a>
+              <Link className='hello'  to='vote'>Polling</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link hello ml-5" href="#">Prediction  </a>
+              <Link className='hello  ml-5'  to='vote'>Prediction</Link>
+                {/* <a className="nav-link hello ml-5" href="#">Prediction  </a> */}
               </li>
               <li className="nav-item">
-                <a className="nav-link hello ml-5" href="#">Previous Results</a>
+              <Link className='hello  ml-5'  to='vote'>Previous Results</Link>
+                
+                {/* <a className="nav-link hello ml-5" href="#">Previous Results</a> */}
               </li>
               <li className="nav-item">
-                <a className="nav-link  hello ml-5 mr-5" href="#" >About</a>
+              <Link className='hello  ml-5 mr-5'  to='vote'>About</Link>
+                
+                {/* <a className="nav-link  hello ml-5 mr-5" href="#" >About</a> */}
               </li>
             </ul>
           </div>
@@ -82,7 +99,9 @@ class VoteBox extends React.Component{
                 <div className='text-center py-3'>
                     <h6>Election is now Easier <br/> Ballot Anywhere</h6>
                     <div className='py-4 btnv'>
-                    <a href="#" class="btn btn-info" role="button" data-bs-toggle="button">Vote Now</a></div>
+                    {/* <Link  class="btn btn-info" data-bs-toggle="button" to='vote'>Vote Now</Link> */}
+                    <Link className='btn btn-info'  to='vote'>Vote</Link>
+                    </div>
                     
                 </div>
                 
@@ -124,3 +143,9 @@ class Footer extends React.Component{
         )
     }
 }
+
+
+
+export  {NavBar 
+  , Footer ,
+   Home }

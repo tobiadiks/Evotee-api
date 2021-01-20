@@ -5,11 +5,17 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {Provider} from 'react-redux'
 import store from './store'
 import Home from './components/home'
+import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
+import ReactRouters from './containers/pages.js'
 
 ReactDOM.render(
     <Provider store={store}>
 {/* <Landing/> */}
-<Home />
+<ReactRouters/>
+{/* <Home /> */}
+
+
+
     </Provider>
 
 , document.getElementById('root'));
