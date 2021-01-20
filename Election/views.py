@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from rest_framework.generics import ListCreateAPIView, ListAPIView
 from rest_framework import permissions
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from django.core.mail import send_mail
 
 from .serializer import ElectionSerializer, ElectorateSerializer, ContestantSerializer,VoterSerializer
 from .models import Election, Contestant
@@ -79,7 +80,7 @@ def electorateDelete(request, pk):
 class ContestantApi(ListCreateAPIView):
     queryset = Contestant.objects.all()
     serializer_class = ContestantSerializer
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.AllowAny]
 
 
 class listContestentApi(ListAPIView):
@@ -90,12 +91,13 @@ class listContestentApi(ListAPIView):
 
 @api_view(['GET'])
 def contestentDetail(request, pk):
-	tasks = Contestant.objects.get(contestantName=pk)
+	tasks = Contestant.objects.get(contestantId=pk)
 	serializer = ContestantSerializer(tasks, many=False)
 	return Response(serializer.data)
 
 
-@api_view(['GET', 'PUT'])
+@permission_classes([permissions.AllowAny])
+@api_view(['GET','PUT'])
 def contestantUpdate(request, pk):
     try:
         model=Contestant.objects.get(contestantId = pk)
@@ -143,10 +145,18 @@ class VotersApi(ListCreateAPIView):
     serializer_class = VoterSerializer
     permission_classes = [permissions.IsAdminUser]
 
+  #  def mailing():
+   #     try:
+   #         send_mail('EVOTEE','Dear '+ str(model.firstName) + ' your voting ID is '+str(model.voterId)+' ','themaestrostech.inc@gmail.com', [model.email], fail_silently=False)
+   #     except:
+   #         error = 'but mailing was not successful, try again'
+   #         return Response ('Successful Response '+ error)
+
 class listVoterApi(ListAPIView):
     queryset = Voter.objects.all()
     serializer_class = VoterSerializer
     permission_classes = [permissions.IsAdminUser]
+    
 
 
 
@@ -157,8 +167,9 @@ def voterDetail(request, pk):
 	serializer = VoterSerializer(tasks, many=False)
 	return Response(serializer.data)
 
-@api_view(['GET', 'PUT'])
+@api_view(['GET','PUT'])
 def voterUpdate(request, pk):
+    error = []
     try:
         model=Voter.objects.get(idNumber= pk)
     except:
@@ -174,7 +185,11 @@ def voterUpdate(request, pk):
         serializer = VoterSerializer(model, request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response ('Successful Updated')
+            try:
+                send_mail('EVOTEE','Dear '+ str(model.firstName) + ' your voting ID is '+str(model.voterId)+' ','themaestrostech.inc@gmail.com', [model.email], fail_silently=False)
+            except:
+                error = 'but mailing was not successful, try again'
+            return Response (' Successful Updated '+ str(error))
             
         else:
             return Response ('Failed')

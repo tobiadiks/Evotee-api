@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'import_export',
     'rest_framework',
-    
     'School',
     'Election',
     'Voters',
@@ -133,3 +132,10 @@ CORS_ALLOWED_ORIGINS = ['http://localhost:3000',
 ]
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'themaestrostech.inc@gmail.com'
+EMAIL_HOST_PASSWORD = '767112aD'

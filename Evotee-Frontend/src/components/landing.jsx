@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar';
 import Head from './Head';
+import Voters from './Voters';
     
 class Landing extends Component {
     state = {  }
@@ -8,6 +9,7 @@ class Landing extends Component {
         return (<>
             <Navbar/>
             <Head/>
+            <Voters/>
             </>
         );
 }
