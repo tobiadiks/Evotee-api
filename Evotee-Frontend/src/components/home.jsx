@@ -13,17 +13,17 @@ import {
 
 
 
-class Home extends React.Component{
+class Allin extends React.Component{
 render(){
     return(
 
 
        
-       <div >
-           <NavBar />
-           <VoteBox />
-           <RegisterBox />
-           {/* <Footer /> */}
+       <div  >
+           < Home />
+          
+          <h1>Full image Test</h1>
+           
         
        </div>
         
@@ -35,17 +35,50 @@ render(){
 }
 
 
+
+class Home extends React.Component{
+  render(){
+      return(
+  
+  
+        <div className="container-fluid   bg ">
+        <div className="row">
+        
+          <div className=" col-12">
+
+          <NavBar />
+             
+             <VoteBox />
+             <RegisterBox />
+
+          </div>
+          </div>  
+
+            
+         </div> 
+          
+
+         
+        
+  
+  
+  
+      )
+  }
+  }
+
 class NavBar extends React.Component{
     render(){
 
 
         return(
-            <div>
+            <div >
 
 <nav className="navbar navbar-expand-lg navbar-info ">
         <div className="container-fluid">
-          <a className="navbar-brand hello ml-2" href="#"><b> EVOTEE</b></a>
-          <button className="navbar-toggler hello" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          {/* <a className="navbar-brand hello ml-2" href="#"><b> EVOTEE</b></a> */}
+          <Link className="navbar-brand hello ml-2"    to='/'><b> EVOTEE</b></Link>
+          <button className="navbar-toggler hello " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon hello" />
           </button>
           
@@ -117,7 +150,7 @@ class VoteBox extends React.Component{
 class RegisterBox extends React.Component{
     render(){
         return(
-            <div className='RegisterBox  mt-5' >
+            <div className='RegisterBox   mv-5' >
                 <div className='text-center py-3'>
                     <h6>Become an Electorate </h6>
                     <div className='py-4 btnv'>
@@ -137,7 +170,7 @@ class Footer extends React.Component{
         return(
 
 
-            <div class="footer">
+            <div class="footer  ">
             <p>Footer</p>
           </div>
         )
@@ -148,4 +181,6 @@ class Footer extends React.Component{
 
 export  {NavBar 
   , Footer ,
-   Home }
+   Home ,
+  Allin
+}

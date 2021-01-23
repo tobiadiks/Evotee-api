@@ -7,8 +7,8 @@ import {
   browserHistory
 } from "react-router-dom";
 
-import Vote from '../components/vote.jsx'
-import {Home} from '../components/home.jsx'
+import {AllPolling} from '../components/vote.jsx'
+import {Allin} from '../components/home.jsx'
 
 class ReactRouters extends React.Component{
 
@@ -17,8 +17,8 @@ class ReactRouters extends React.Component{
 
 
     <Router >
-     <Route exact path='/' component={ Home} />
-     <Route  path='/vote' component={ Vote} />
+     <Route exact path='/' component={ Allin} />
+     <Route  path='/vote' component={ AllPolling} />
                 {/* <Route  path='/slider' component={ Slider} /> */}
 
    </Router>

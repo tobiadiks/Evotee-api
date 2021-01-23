@@ -1,21 +1,52 @@
-body, html {
+body, html  {
     height: 100%;
+    
     margin: 0;
 }
-body{
+/* body{  */
     /* The image used */
-    background-image: url(../images/bgimage.webp);
+    /* background-image: url(..//images/bgimage.webp); */
 
     /* Full height */
-    height: auto; 
+    /* height: auto; 
+    margin: 0; 
+    background-color: rgb(19, 17, 17); */
 
     /* Center and scale the image nicely */
-    background-position: center;
+    /* background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+} */
+
+.bg {
+    /* The image used */
+    background-image: url(../images/bgimage.webp);
+    /* background-color: red; */
+  
+    /* Full height */
+    height:100vh     ;
+    width: 100 vh;
+    /* min-height: 50%; */
+  
+    /* Center and scale the image nicely */
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+  }
+
+.tog{
+    background-color: rgb(133, 94, 94);
 }
+
+
+
+
 .hello{
     color: white;
+}
+.hi{
+    color: royalblue;
 }
 
  .testing{
