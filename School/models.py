@@ -12,5 +12,5 @@ class Electorate(models.Model):
 	electorateApproved = models.BooleanField(default=False)
 	
 	def __str__(self):
-		return str(self.electorateName)
+		return (self.electorateName)
 

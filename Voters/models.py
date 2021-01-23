@@ -21,7 +21,7 @@ class Voter(models.Model):
     firstName = models.CharField(max_length = 40)
     lastName = models.CharField(max_length = 40)
     Gender = models.CharField(max_length=12, choices=gender_choices , default='1')
-    email = models.EmailField()
+    email = models.EmailField(default = "@")
     idNumber = models.IntegerField(primary_key = True)
     voterId = models.IntegerField(default=generator)
     #TODO Change idNumber to suit countries (NIN or CNIC)

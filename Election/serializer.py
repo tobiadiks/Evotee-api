@@ -4,9 +4,10 @@ from School.models import Electorate
 from Voters.models import Voter
 
 class ElectionSerializer(serializers.ModelSerializer):
+    organizerName = serializers.CharField(source='organizer.electorateName')
     class Meta:
         model = Election
-        fields = ('electionName','electionId','organizer','is_active')
+        fields = ('electionName', 'electionId','organizer','organizerName','startDate','endDate', 'is_active')
 
 class ElectorateSerializer(serializers.ModelSerializer):
     class Meta:
