@@ -23,3 +23,8 @@ class VoterSerializer(serializers
     class Meta:
         model = Voter
         fields = '__all__'
+
+# class Election_Details_Serializer(serializers.ModelSerializer):
+#     class Meta :
+#         model = Contestant
+#         fields= ('contestantName','electionName','contestantId')

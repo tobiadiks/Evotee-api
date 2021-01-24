@@ -2,6 +2,15 @@ import React from 'react'
 import {NavBar} from './home'
 import bgimage from '../assets/images/bgimage.webp'
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  browserHistory
+} from "react-router-dom";
+
+
 
 
 class AllPolling extends React.Component {
@@ -35,6 +44,7 @@ class AllPolling extends React.Component {
 class VotePage extends React.Component {
     state = {  }
     render() { 
+      
         return (
             
           <div className="container-fluid bg  ">
@@ -77,7 +87,7 @@ class Election extends React.Component{
             this.setState({
                 data:data
             });
-            console.log('fetched' , data[0].electionId);
+            
         });
 
       }
@@ -85,8 +95,25 @@ class Election extends React.Component{
       componentDidMount() {
         this.fetchData();
       }
+
+
+      checkdata=(e)=>{
+
+        fetch (`http://localhost:8000/api/list/contestant/${e} ` )
+        .then(response => response.json())
+        .then((data)=>console.log(data))
+
+        
+        
+
+
+       
+      }
+
     render(){
 
+      
+        
         
         
 
@@ -104,10 +131,12 @@ class Election extends React.Component{
               <div className="card my-2" >
         <img className="card-img-top img-fluid" height='200' src={bgimage} alt="Card image cap" />
         <div className="card-body">
-          <h5 className="card-title">{v.electionName}</h5>
+          <h5 className="card-title">{v.electionName} </h5>
           <h5 className="card-title">Election Organizer :{v.organizer}</h5>
           <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" className="btn btn-primary" onClick={()=>this.fetchData()}>Go somewhere</a>
+          {/* <a href="#" className="btn btn-primary" onClick={()=>this.fetchData()}>Go somewhere</a> */}
+          <Link className="btn btn-primary" onClick={()=>this.checkdata(v.electionId)}  to='electiondetail'>Details</Link>
+          
         </div>
       </div>
 
@@ -122,25 +151,43 @@ class Election extends React.Component{
           </div>
 
     
-    
-         
-
-         
-
-
-
-       
-         
-      
-      
-       
-
-           
-         
 
         )
     }
 }
+
+// Election Details
+
+class Electiondetail extends React.Component{
+
+
+  constructor() {
+    super();
+    this.state = {
+      election_data: [],
+    };
+  }
+
+
+
+  render(){
+    // console.log(this.props.x)
+      return(
+
+          <div>
+              <h1>Election Details</h1>
+              
+
+              <button > checking</button>
+              
+          </div>
+      )
+  }
+}
+
+
+
+// export  {Electiondetail}
 
 
 
@@ -151,6 +198,7 @@ class Election extends React.Component{
  
 export   {
  
-  AllPolling
+  AllPolling,
+  Electiondetail
 
 };

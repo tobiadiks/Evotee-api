@@ -10,6 +10,7 @@ def generator():
 
 class Election(models.Model):
 	electionName=models.CharField(max_length=200)
+	electionImage=models.ImageField(upload_to='Election_Banners' , blank=True)
 	electionId=models.IntegerField(primary_key = True, unique=True,default=generator)
 	organizer=models.ForeignKey(Electorate, on_delete=models.CASCADE)
 	is_active=models.BooleanField(default=False)

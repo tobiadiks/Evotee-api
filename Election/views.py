@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView 
 
+
 from .serializer import ElectionSerializer, ElectorateSerializer, ContestantSerializer,VoterSerializer
 from .models import Election, Contestant
 from School.models import Electorate
@@ -105,10 +106,16 @@ class ContestantApi(ListCreateAPIView):
     permission_classes = [permissions.IsAdminUser]
 
 
-class listContestentApi(ListAPIView):
-    queryset = Contestant.objects.all()
-    serializer_class = ContestantSerializer
-    permission_classes = [permissions.IsAdminUser]
+# class listContestentApi(ListAPIView):
+#     queryset = Contestant.objects.all().filter(electionName=963297842)
+#     serializer_class = ContestantSerializer
+#     permission_classes = [permissions.IsAdminUser]
+
+@api_view(['GET'])
+def listContestentApi(request,pk):
+	tasks = Contestant.objects.all().filter(electionName=pk)
+	serializer = ContestantSerializer(tasks, many=True)
+	return Response(serializer.data)
 
 
 @api_view(['GET'])
@@ -277,3 +284,19 @@ def ElectionDelete(request, pk):
         return Response ('Deleted')    
         
     
+# @api_view(['GET', 'DELETE'])
+# def Election_Details(request,pk):
+    
+#     try:
+#         contestants=Contestant.objects.get(electionName=pk)
+#     except:
+#         return Response ('Not Found')
+
+#     if request.method == 'GET':
+
+#         serializer = Election_Details_Serializer(instance=contestants)
+#         return Response(serializer.data)
+        
+    
+
+

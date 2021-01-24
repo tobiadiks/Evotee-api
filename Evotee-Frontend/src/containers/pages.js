@@ -9,6 +9,7 @@ import {
 
 import {AllPolling} from '../components/vote.jsx'
 import {Allin} from '../components/home.jsx'
+import {Electiondetail} from '../components/vote.jsx'
 
 class ReactRouters extends React.Component{
 
@@ -19,7 +20,8 @@ class ReactRouters extends React.Component{
     <Router >
      <Route exact path='/' component={ Allin} />
      <Route  path='/vote' component={ AllPolling} />
-                {/* <Route  path='/slider' component={ Slider} /> */}
+     <Route  path='/electiondetail' component={ Electiondetail} />
+                
 
    </Router>
 

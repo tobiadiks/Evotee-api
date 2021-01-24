@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import *
+from .import views
 
 
 urlpatterns = [
@@ -14,7 +15,7 @@ urlpatterns = [
 
     #contestent CRUD urls
     path('api/create/contestant', ContestantApi.as_view()),
-    path('api/list/contestant', listContestentApi.as_view()),
+    path('api/list/contestant/<str:pk>/', listContestentApi),
     path('api/contestant-detail/<str:pk>/', contestentDetail, name="contestant-detail"),  # try http://localhost:8000/api/contestent-detail/Aqbar Jamiu/
     path('api/contestant-update/<str:pk>/', contestantUpdate, name="contestant-update"),
     path('api/contestant-delete/<str:pk>/', ContestantDelete, name="delete-contestant"),
@@ -33,4 +34,9 @@ urlpatterns = [
     path('api/election-detail/<str:pk>/', electionDetail, name="election-detail"),
     path('api/election-update/<str:pk>/', electionUpdate, name="election-update"),
     path('api/election-delete/<str:pk>/', ElectionDelete, name="election-delete"),
+
+
+    # # electionDetailsgetting
+
+    # path('api/Election_Details/<str:pk>/', Election_Details, name="Election_Details"),
 ]
