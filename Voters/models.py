@@ -31,7 +31,7 @@ class Voter(models.Model):
     active = models.BooleanField(default=True)
     voted = models.BooleanField(default=False)
     id=models.IntegerField(
-default=0)
+default=idNumber)
 
 
     def __str__(self):

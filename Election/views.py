@@ -4,6 +4,7 @@ from rest_framework import permissions
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.core.mail import send_mail
+from evotee.settings import EMAIL_HOST
 
 from .serializer import ElectionSerializer, ElectorateSerializer, ContestantSerializer,VoterSerializer
 from .models import Election, Contestant
@@ -139,18 +140,28 @@ def ContestantDelete(request, pk):
         return Response ('Deleted')            
 
 
+@api_view(['POST','GET'])
+def VotersApi(request):
+    if request.method=='POST':
+        model = Voter()
+        serializer = VoterSerializer(instance = model,data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            #TODO let it work with a try method
+            send_mail('EVOTEE','Dear ' + str(request.data['firstName'])+' Welcome to the best voting System.', EMAIL_HOST,[request.data['email']] )
+            #return Response('Something went wrong')
+        return Response(serializer.data)
 
-class VotersApi(ListCreateAPIView):
-    queryset = Voter.objects.all()
-    serializer_class = VoterSerializer
-    permission_classes = [permissions.IsAdminUser]
+    if request.method == 'GET':
+        model = Voter.objects.all()
+        serializer = VoterSerializer(instance=model, many=True)
+        return Response(serializer.data)
 
-  #  def mailing():
-   #     try:
-   #         send_mail('EVOTEE','Dear '+ str(model.firstName) + ' your voting ID is '+str(model.voterId)+' ','themaestrostech.inc@gmail.com', [model.email], fail_silently=False)
-   #     except:
-   #         error = 'but mailing was not successful, try again'
-   #         return Response ('Successful Response '+ error)
+    
+
+    
+    
+    
 
 class listVoterApi(ListAPIView):
     queryset = Voter.objects.all()
@@ -186,7 +197,7 @@ def voterUpdate(request, pk):
         if serializer.is_valid():
             serializer.save()
             try:
-                send_mail('EVOTEE','Dear '+ str(model.firstName) + ' your voting ID is '+str(model.voterId)+' ','themaestrostech.inc@gmail.com', [model.email], fail_silently=False)
+                send_mail('EVOTEE','Dear '+ str(model.firstName) + ' your detail has been updated if you did not request for an update contact us support@evotee.com '+ ' ','themaestrostech.inc@gmail.com', [model.email], fail_silently=False)
             except:
                 error = 'but mailing was not successful, try again'
             return Response (' Successful Updated '+ str(error))

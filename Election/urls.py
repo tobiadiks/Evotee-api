@@ -21,7 +21,7 @@ urlpatterns = [
 
 
     #Voter CRUD urls
-    path('api/create/voters', VotersApi.as_view()),
+    path('api/create/voters', VotersApi),
     path('api/list/voters', listVoterApi.as_view()),
     path('api/voter-detail/<str:pk>/', voterDetail, name="task-detail"),
     path('api/voter-update/<str:pk>/', voterUpdate, name="voter-update"),
